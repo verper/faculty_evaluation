@@ -1,0 +1,38 @@
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+#main {
+	/*min-height: 100%;*/
+}
+
+@at-root {
+  // Import the fonts
+  @font-face {
+    font-family: 'Proxima Nova Light';
+    src: url('../fonts/ProximaNova-Light.eot');
+    src: url('../fonts/ProximaNova-Light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ProximaNova-Light.woff2') format('woff2'),
+         url('../fonts/ProximaNova-Light.woff') format('woff'),
+         url('../fonts/ProximaNova-Light.ttf') format('truetype'),
+         url('../fonts/ProximaNova-Light.svg#proxima_nova_light') format('svg');
+  }
+}
+
+.main-container {
+  margin-top: 20px;
+}
+
+.page-header {
+  
+}
+
+.box-shadow {
+  box-shadow: 4px 4px 5px 0px #ddd;
+}
+
+option {
+  padding: 5px;
+  font-size: 16px;
+}

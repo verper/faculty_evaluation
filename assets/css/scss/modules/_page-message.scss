@@ -1,0 +1,23 @@
+.page-message {
+    /*position: fixed;*/
+    left: -100%;
+    bottom: 10px;
+    z-index: 999999;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 0s;
+    animation: slide 0.5s forwards;
+    animation-delay: 0s;
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
+}
+
+.alert-dismissible .close {
+    color: #ffffff;
+    opacity: 0.8;
+}
