@@ -4,7 +4,7 @@
 
 <?php if ( $logged_in->role == '1' ): // STUDENT TYPE ?>
 <div class="row">
-    <?php if (isset($faculties)): ?>
+    <?php if ($faculties): ?>
       <?php foreach( $faculties as $faculty ): 
         if ($this->courses->check_student_course($faculty->id, $logged_in->id)): 
       ?>
@@ -36,7 +36,7 @@
 
 <?php if ( $logged_in->role == '2' ): // PEER TO PEER TYPE  ?>
 <div class="row">
-    <?php if (isset($faculties)): ?>
+    <?php if ($faculties): ?>
       <?php foreach( $faculties as $faculty ): ?>
         <div class="form-group col-sm-4" style="min-height: 200px;">
           <div class="media">
@@ -88,7 +88,7 @@
   <h4><?php echo $faculties->title;?></h4>
 </legend>
 <div class="row">
-    <?php if (isset($faculties->courses)): ?>
+    <?php if ($faculties): ?>
       <?php foreach( $faculties->courses as $faculty ): ?>
         <div class="form-group col-sm-4" style="min-height: 200px;">
           <div class="media">
@@ -121,7 +121,7 @@
   <h4><?php echo $faculties->title;?></h4>
 </legend>
 <div class="row">
-    <?php if (isset($faculties->programs)): ?>
+    <?php if ($faculties): ?>
       <?php foreach( $faculties->programs as $faculty ): ?>
         <div class="form-group col-sm-4" style="min-height: 200px;">
           <div class="media card">

@@ -55,6 +55,7 @@
 			$evaluate = true;
 			$courses = true;
 			$users = true;
+			$evaluation = true;
 			break;
 		case 4:
 			$evaluate = true;

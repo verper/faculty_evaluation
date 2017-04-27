@@ -6,7 +6,7 @@
 	if ( $logged_in->role == '5' ) {
 		$this->load->view('templates/inner/forms_usage');
 	}
-	elseif ( $logged_in->role == '4' ) {
+	elseif ( $logged_in->role == '4' || $logged_in->role == '3' ) {
 		$this->load->view('templates/inner/peer_schedule');
 	}
 ?>
