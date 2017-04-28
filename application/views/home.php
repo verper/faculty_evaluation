@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<div class="content">
-		<img src="/assets/images/cover.jpg" class="cover-image">
+		<img src="<?php echo base_url();?>assets/images/cover.jpg" class="cover-image">
 		<div class="container">
 			<div class="jumbotron">
 			  <div class="row">

@@ -12,8 +12,8 @@
         <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
 
         <!-- Custom styles for this template -->
-        <link href="/assets/css/app.css" rel="stylesheet">
-        <link href="/assets/css/styles.css" rel="stylesheet">
+        <link href="<?php echo base_url();?>assets/css/app.css" rel="stylesheet">
+        <link href="<?php echo base_url();?>assets/css/styles.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
