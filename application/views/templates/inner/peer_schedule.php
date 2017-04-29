@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/assets/js/jquery-datepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-datepicker.js" charset="UTF-8"></script>
 
 <div class="row">
   <div class="col-sm-12">

@@ -72,7 +72,7 @@
             <td><?php echo $program->title; ?></td>
             <td><?php echo $program->lastname; ?>, <?php echo $program->firstname; ?> <?php echo $program->middlename; ?></td>
             <td><?php echo $program->college->id; ?></td>
-            <td><a href="">Courses</a></td>
+            <td><a href="<?php echo base_url();?>evaluation/courses?q=<?php echo $program->id;?>">Courses</a></td>
             <td><div class="btn-group">
                   <a class="btn btn-info btn-xs" title="Edit" href="#edit-program-<?php echo $program->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
                   <a class="btn btn-danger btn-xs" title="Remove" href="#remove-program-<?php echo $program->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i></a>
