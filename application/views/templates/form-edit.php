@@ -22,7 +22,7 @@
   <?php foreach($categories as $cat): ?>
     <!--<form method="post" action="" id="form-cat-<?php echo $cat->id;?>">-->
       <div class="form-group box-shadow" id="category-container-<?php echo $cat->id;?>">
-        <form method="post" action="/forms/update_questions" class="category-form">
+        <form method="post" action="<?php echo base_url();?>forms/update_questions" class="category-form">
           <div class="input-group">
             <span class="input-group-btn">
               <a class="btn btn-default input-sm btn-sm" href="#cat-<?php echo $cat->id;?>" data-toggle="collapse" aria-expanded="false" aria-controls="navbar"><i class="glyphicon glyphicon-menu-down"></i></a>
@@ -77,7 +77,7 @@
           <input type="hidden" name="remove_que" value="" />
         </form>
 
-        <form method="post" action="/forms/delete_category" id="delete-category-<?php echo $cat->id;?>">
+        <form method="post" action="<?php echo base_url();?>forms/delete_category" id="delete-category-<?php echo $cat->id;?>">
           <input type="hidden" name="form_id" value="delete_category"/>
           <input type="hidden" name="data_id" value="<?php echo $data->id;?>"/>
           <input type="hidden" name="category_id" value="<?php echo $cat->id;?>"/>
@@ -88,7 +88,7 @@
 </div>
 
 <div class="form-group">
-  <form id="new-category" action="/forms/add_category/" method="post">
+  <form id="new-category" action="<?php echo base_url();?>forms/add_category/" method="post">
     <div class="input-group">
       <input type="text" class="form-control input-sm" name="category" placeholder="Type here for new category" id="new-category-content" required/>
       <span class="input-group-btn">

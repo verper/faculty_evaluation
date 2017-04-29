@@ -13,7 +13,7 @@
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active in" id="student">
     <br>
-    <form action="/reports/pdf" method="post" style="display:inline-block" target="_blank">
+    <form action="<?php echo base_url();?>reports/pdf" method="post" style="display:inline-block" target="_blank">
       <input type="hidden" name="form_id" value="pdf_report">
       <input type="hidden" name="form" value="1">
       <div class="form-group">
@@ -81,7 +81,7 @@
   </div>
   <div class="tab-pane fade" id="peer">
     <br>
-    <form action="/reports/pdf" method="post" style="display:inline-block" target="_blank">
+    <form action="<?php echo base_url();?>reports/pdf" method="post" style="display:inline-block" target="_blank">
       <input type="hidden" name="form_id" value="pdf_report">
       <input type="hidden" name="form" value="2">
       <div class="form-group">
@@ -148,7 +148,7 @@
   </div>
   <div class="tab-pane fade" id="program-head">
     <br>
-    <form action="/reports/pdf" method="post" style="display:inline-block" target="_blank">
+    <form action="<?php echo base_url();?>reports/pdf" method="post" style="display:inline-block" target="_blank">
       <input type="hidden" name="form_id" value="pdf_report">
       <input type="hidden" name="form" value="3">
       <div class="form-group">
@@ -215,7 +215,7 @@
   </div>
   <div class="tab-pane fade" id="dean">
     <br>
-    <form action="/reports/pdf" method="post" style="display:inline-block" target="_blank">
+    <form action="<?php echo base_url();?>reports/pdf" method="post" style="display:inline-block" target="_blank">
       <input type="hidden" name="form_id" value="pdf_report">
       <input type="hidden" name="form" value="4">
       <div class="form-group">

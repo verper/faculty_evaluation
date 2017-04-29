@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					          <?php endif; ?>
 					        </div>
 						<legend> <h4><i class="glyphicon glyphicon-user"></i> Login</h4> </legend>
-						<form class="form form-login" method="post" action="/login">
+						<form class="form form-login" method="post" action="<?php echo base_url();?>login">
 							<div class="form-group">
 								<input class="form-control" type="text" name="id" placeholder="ID Number (ex. 123-4567-890)" />
 							</div>

@@ -5,7 +5,7 @@
 
 <legend><?php echo $form->form->title;?></legend>
 <br/>
-<form method="post" action="/evaluate/process_evaluation">
+<form method="post" action="<?php echo base_url();?>evaluate/process_evaluation">
 <?php if (!empty($form->categories)): ?>
 <?php foreach($form->categories as $cat): ?>
 	<h5><strong><?php echo $cat->title;?></strong></h5>

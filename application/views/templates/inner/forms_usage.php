@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">Form usage <a href="javascript:void(0)" data-toggle="collapse" data-target="#form-user-container"><i class="glypicon glyphicon-minus pull-right"></i></a></h3>
       </div>
-      <form class="form-horizontal" method="post" action="/evaluation/form_usage" id="form-user-container">       
+      <form class="form-horizontal" method="post" action="<?php echo base_url();?>evaluation/form_usage" id="form-user-container">       
         <div class="panel-body">
           <div class="alert alert-dismissible alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>

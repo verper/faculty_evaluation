@@ -20,7 +20,7 @@
 <!-- END SIDEBAR USER TITLE -->
 <!-- SIDEBAR BUTTONS -->
 <div class="profile-userbuttons">
-	<a class="btn btn-danger btn-xs" href="/profile">Profile</a>
+	<a class="btn btn-danger btn-xs" href="<?php echo base_url();?>profile">Profile</a>
 </div>
 <!-- END SIDEBAR BUTTONS -->
 <!-- SIDEBAR MENU -->

@@ -36,7 +36,7 @@
       <?php foreach($forms as $form): ?>
         <tr>
           <td style="vertical-align: middle;"><?php echo $form->title;?></td>
-          <td style="vertical-align: middle;"><a class="btn btn-info btn-xs" href="/forms/<?php echo $form->id;?>">Edit</a> <a class="btn btn-danger btn-xs">Delete</a>
+          <td style="vertical-align: middle;"><a class="btn btn-info btn-xs" href="<?php echo base_url();?>forms/<?php echo $form->id;?>">Edit</a> <a class="btn btn-danger btn-xs">Delete</a>
           </td>
         </tr>
       <?php endforeach; ?>

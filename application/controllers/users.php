@@ -132,7 +132,7 @@ class Users extends CI_Controller {
 				$this->session->set_flashdata('error', 'Unable to reset <strong>' . $id . '</strong> password.');
 			}
 
-			redirect('/users/edit/' . $id);
+			redirect('<?php echo base_url();?>users/edit/' . $id);
 		}
 		redirect('users');
 	}

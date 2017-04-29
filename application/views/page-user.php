@@ -10,8 +10,8 @@
 
 <?php $this->load->view('templates/partials/header.php'); ?>
 
-  <link href="/assets/css/dashboard.css" rel="stylesheet">
-  <link href="/assets/css/profile.css" rel="stylesheet">
+  <link href="<?php echo base_url();?>assets/css/dashboard.css" rel="stylesheet">
+  <link href="<?php echo base_url();?>assets/css/profile.css" rel="stylesheet">
 
   <?php $this->load->view('templates/navbar.php'); ?>
 

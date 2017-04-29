@@ -9,7 +9,7 @@
           <div class="panel-heading">
             <h3 class="panel-title">Schedule a Peer to Peer evaluation</h3>
           </div>
-          <form method="post" action="/evaluation/peer_schedule">
+          <form method="post" action="<?php echo base_url();?>evaluation/peer_schedule">
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-4">
@@ -113,7 +113,7 @@
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <h4 class="modal-title">Change schedule</h4>
                         </div>
-                        <form action="/evaluation/update_schedule" method="post">
+                        <form action="<?php echo base_url();?>evaluation/update_schedule" method="post">
                           <div class="modal-body">
                             <div class="form-group">
                               <label class="control-label">Date</label>

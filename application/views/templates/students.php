@@ -32,7 +32,7 @@
                   <td><?php echo $p->user->id;?></td>
                   <td><?php echo $p->user->lastname;?>, <?php echo $p->user->firstname;?> <?php echo $p->user->middlename;?></td>
                   <td class="text-center">
-                    <form method="post" action="/courses/remove_student">
+                    <form method="post" action="<?php echo base_url();?>courses/remove_student">
                       <button type="submit" class="btn btn-danger btn-xs" role="button" title="Remove student"><i class="glyphicon glyphicon-remove"></i></button>
                       <input type="hidden" name="form_id" value="remove_student"/>
                       <input type="hidden" name="student_id" value="<?php echo $p->user->id;?>" />
@@ -79,7 +79,7 @@
                 <td><?php echo $student->id;?></td>
                 <td><?php echo $student->lastname;?>, <?php echo $student->firstname;?> <?php echo $student->middlename;?></td>
                 <td class="text-center">
-                  <form method="post" action="/courses/add_student">
+                  <form method="post" action="<?php echo base_url();?>courses/add_student">
                     <button type="submit" class="btn btn-success btn-xs" role="button" title="Add student"><i class="glyphicon glyphicon-plus"></i></button>
                     <input type="hidden" name="form_id" value="add_student"/>
                     <input type="hidden" name="student_id" value="<?php echo $student->id;?>" />

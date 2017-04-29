@@ -2,7 +2,7 @@
 <?php global $logged_in; ?>
 
 <legend>Profile</legend>
-<form class="form-horizontal" method="post" action="/profile/update" enctype="multipart/form-data">
+<form class="form-horizontal" method="post" action="<?php echo base_url();?>profile/update" enctype="multipart/form-data">
   <div class="form-group row">
     <label class="control-label col-sm-2"></label>
     <div class="col-sm-10">
@@ -60,7 +60,7 @@
 </form>
 <br/>
 <br/>
-<form class="form-horizontal" method="post" action="/profile/change_password">
+<form class="form-horizontal" method="post" action="<?php echo base_url();?>profile/change_password">
   <legend>Change password</legend>
   <div class="form-group row">
     <label class="control-label col-sm-2">Current Password</label>

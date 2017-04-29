@@ -1,5 +1,5 @@
 <div class="form-group row">
-  <a class="btn btn-link btn-sm" href="/users"><< Back</a>
+  <a class="btn btn-link btn-sm" href="<?php echo base_url();?>users"><< Back</a>
 </div>
 
 <?php
@@ -55,7 +55,7 @@
   <?php if (isset($user)): ?>
     <legend>Reset password</legend>
     <p><i class="glyphicon glyphicon-exclamation-sign"></i> After reseting this user's password his password will be the same as his user id.</p>
-    <form method="post" action="/users/reset_password">
+    <form method="post" action="<?php echo base_url();?>users/reset_password">
       <button class="btn btn-primary btn-sm" role="button" type="submit">Resset password</button>
       <input type="hidden" name="form_id" value="reset_password"/>
       <input type="hidden" name="user_id" value="<?php echo $userid;?>"/>

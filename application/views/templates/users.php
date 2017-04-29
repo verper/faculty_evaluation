@@ -1,4 +1,4 @@
-<h1 class="page-header">Users <a class="btn btn-primary pull-right" href="/users/add">Add</a></h1>
+<h1 class="page-header">Users <a class="btn btn-primary pull-right" href="<?php echo base_url();?>users/add">Add</a></h1>
 
 <?php $this->load->view('templates/inner/search_filter.php'); ?>
 
@@ -31,7 +31,7 @@
                     </a>
                     <ul class="dropdown-menu pull-right">
                       <li><a class=""><i class="glyphicon glyphicon-eye-open"></i> View </a></li>
-                      <li><a class="" title="Edit" href="/users/edit/<?php echo $user->id;?>"><i class="glyphicon glyphicon-pencil"></i> Edit</a></li>
+                      <li><a class="" title="Edit" href="<?php echo base_url();?>users/edit/<?php echo $user->id;?>"><i class="glyphicon glyphicon-pencil"></i> Edit</a></li>
                       <li><a class="" title="Remove" href="#remove-<?php echo $user->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i> Delete</a></li>
                      </ul>
                   </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                          <a class="btn btn-primary" href="/users/delete/<?php echo $user->id;?>">Yes</a>
+                          <a class="btn btn-primary" href="<?php echo base_url();?>users/delete/<?php echo $user->id;?>">Yes</a>
                         </div>
                       </div>
                     </div>

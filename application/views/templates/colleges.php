@@ -59,8 +59,8 @@
           <tr>
             <td><?php echo $college->id; ?></td>
             <td><?php echo $college->title; ?></td>
-            <td><a href="/users/edit/<?php echo $college->userid;?>"><?php echo $college->lastname; ?>, <?php echo $college->firstname; ?> <?php echo $college->middlename; ?></a></td>
-            <td><a href="/programs?q=<?php echo $college->id;?>">Programs</a></td>
+            <td><a href="<?php echo base_url();?>users/edit/<?php echo $college->userid;?>"><?php echo $college->lastname; ?>, <?php echo $college->firstname; ?> <?php echo $college->middlename; ?></a></td>
+            <td><a href="<?php echo base_url();?>programs?q=<?php echo $college->id;?>">Programs</a></td>
             <td><div class="btn-group btn-group-justified">
                   <a class="btn btn-info btn-xs" title="Edit" href="#edit-college-<?php echo $college->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
                   <a class="btn btn-danger btn-xs" title="Remove" href="#remove-college-<?php echo $college->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i></a>
@@ -118,7 +118,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                          <a class="btn btn-primary" href="/colleges/delete/<?php echo $college->id;?>">Yes</a>
+                          <a class="btn btn-primary" href="<?php echo base_url();?>colleges/delete/<?php echo $college->id;?>">Yes</a>
                         </div>
                       </div>
                     </div>

@@ -74,7 +74,7 @@
             <td><?php echo $course->lastname; ?>, <?php echo $course->firstname; ?> <?php echo $course->middlename; ?></td>
             <td><?php echo $course->program; ?></td>
             <td><?php echo $course->college; ?></td>
-            <td><a href="/courses/<?php echo $course->id;?>">Students</a></td>
+            <td><a href="<?php echo base_url();?>courses/<?php echo $course->id;?>">Students</a></td>
             <td><div class="btn-group">
                   <a class="btn btn-info btn-xs" title="Edit" href="#edit-course-<?php echo $course->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
                   <a class="btn btn-danger btn-xs" title="Remove" href="#remove-course-<?php echo $course->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i></a>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                          <a class="btn btn-primary" href="/courses/delete/<?php echo $course->id;?>">Yes</a>
+                          <a class="btn btn-primary" href="<?php echo base_url();?>courses/delete/<?php echo $course->id;?>">Yes</a>
                         </div>
                       </div>
                     </div>

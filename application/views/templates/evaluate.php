@@ -19,7 +19,7 @@
               <h5><strong><?php echo $subject->id;?></strong></h5>
               <p><?php echo $subject->title;?></p>
               <?php if ( $this->evaluation->evaluation_access($logged_in->id, $faculty->id) ): ?>
-                <a class="btn btn-primary btn-sm" href="/evaluate/<?php echo $faculty->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
+                <a class="btn btn-primary btn-sm" href="<?php echo base_url();?>evaluate/<?php echo $faculty->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
               <?php else: ?>
                 <span class="label label-success"><i class="glyphicon glyphicon-ok"></i> Finished</span>
               <?php endif?>
@@ -54,7 +54,7 @@
 
               <?php if ( $schedule == $today ): ?>
                   <?php if ($this->evaluation->evaluation_access($logged_in->id, $faculty->target->id)): ?>
-                      <a class="btn btn-primary btn-sm" href="/evaluate/<?php echo $faculty->target->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
+                      <a class="btn btn-primary btn-sm" href="<?php echo base_url();?>evaluate/<?php echo $faculty->target->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
                   <?php else: ?>
                       <span class="label label-success">Finished</span>
                   <?php endif; ?>
@@ -100,7 +100,7 @@
               <h5><strong><?php echo $faculty->id;?></strong></h5>
               <p><?php echo $faculty->title;?></p>
               <?php if ( $this->evaluation->evaluation_access($logged_in->id, $faculty->assigned->id) ): ?>
-                <a class="btn btn-primary btn-sm" href="/evaluate/<?php echo $faculty->assigned->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
+                <a class="btn btn-primary btn-sm" href="<?php echo base_url();?>evaluate/<?php echo $faculty->assigned->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
               <?php else: ?>
                   <span class="label label-success"><i class="glyphicon glyphicon-ok"></i> Finished</span>
               <?php endif?>
@@ -134,7 +134,7 @@
               <h5><strong><?php echo isset($faculty->program)?'('.$faculty->program.') ':''; ?><?php echo $faculty->id;?></strong></h5>
               <h6><?php echo $faculty->title;?></h6>
               <?php if ( $this->evaluation->evaluation_access($logged_in->id, $faculty->supervisor->id) ): ?>
-                <a class="btn btn-primary btn-sm" href="/evaluate/<?php echo $faculty->supervisor->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
+                <a class="btn btn-primary btn-sm" href="<?php echo base_url();?>evaluate/<?php echo $faculty->supervisor->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
               <?php else: ?>
                   <span class="label label-success"><i class="glyphicon glyphicon-ok"></i> Finished</span>
               <?php endif?>

@@ -140,7 +140,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                          <a class="btn btn-primary" href="/programs/delete/<?php echo $program->id;?>">Yes</a>
+                          <a class="btn btn-primary" href="<?php echo base_url();?>programs/delete/<?php echo $program->id;?>">Yes</a>
                         </div>
                       </div>
                     </div>
