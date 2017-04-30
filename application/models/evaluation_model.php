@@ -107,6 +107,10 @@ class Evaluation_model extends CI_Model {
 
 
     function process_evaluation($evaluator, $faculty, $ratings, $form_used, $comments) {
+        foreach( $ratings as $rate ) {
+            if ( $rate > 5 || $rate < 1 ) { return false; }
+        }
+
         $data = array(
             'evaluator' => $evaluator,
             'subject' => $faculty,
@@ -117,7 +121,7 @@ class Evaluation_model extends CI_Model {
         
         // $this->db->db_debug = FALSE;
         $query = $this->db->insert('ratings', $data);
-
+        
         return $query ? true : false;
     }
 
