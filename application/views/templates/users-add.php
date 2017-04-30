@@ -9,6 +9,8 @@
   $middlename = isset($user) ? $user->middlename : '';
   $roleid       = isset($user) ? $user->role : '';
   $form_id    = isset($user) ? 'edit_user' : 'new_user';
+
+  global $logged_in;
 ?>
 
 <h1 class="page-header"><?php echo isset($user)? 'Edit ' . $lastname . ', ' . $firstname . ' ' . $middlename : 'New User'; ?></h1>
@@ -35,6 +37,7 @@
       <input class="form-control text-uppercase" type="text" name="middlename" placeholder="Middle name" value="<?php echo $middlename;?>" />
     </div>
 
+    <?php if ( $logged_in->role != '2' ) :?>
     <div class="form-group">
       <label class="control-label">Role</label>
       <select class="form-control" name="role" required>
@@ -44,6 +47,7 @@
         <?php endforeach; ?>
       </select>
     </div>
+    <?php endif; ?>
 
     <div class="form-group">
       <input class="btn btn-primary" type="submit" value="Save" />
