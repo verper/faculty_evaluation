@@ -15,7 +15,7 @@ class Reports extends CI_Controller {
 	{
 		parent::__construct();
 
-		// $this->load->model('colleges');
+		$this->load->model('colleges_model', 'colleges');
 		// $this->load->model('programs');
 		// $this->load->model('courses');
 		$this->load->model('user_model', 'user');
@@ -43,10 +43,12 @@ class Reports extends CI_Controller {
 	function overall($slug='') {
 		$logged_in = $this->session->userdata('logged_in');
 		$faculties = $this->user->get_list_by_college($logged_in->id);
+		$college = $this->db->select('title')->from('colleges')->where('dean', $logged_in->id)->get()->row();
 
 		$this->data['title'] = 'Reports Overall';
 		$this->data['content'] = 'reports_overall';
 		$this->data['faculties'] = $faculties;
+		$this->data['college_name'] = $college ? $college->title : '';
 		
 		if ( $slug == 'pdf' ) {
 			$this->load->library('pdf');

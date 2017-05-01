@@ -3,6 +3,13 @@
   #toolbar {
     display: none;
   }
+  .form-group {
+    margin-bottom: 25px;
+    font-family: arial;font-size: 12;
+  }
+  h1 {
+    font-size: 24px;
+  }
 }
 @page {
   margin: 0.5in;
@@ -21,12 +28,29 @@ td {
 .text-right {
   text-align: right;
 }
+.text-center {
+  text-align: center;
+}
+p {
+  margin: 0;
+}
 </style>
 
 <h1 class="page-header">Overall Reports</h1>
 
 <div class="form-group" id="toolbar">
   <a class="btn btn-sm btn-primary" href="reports/overall/pdf" target="_blank"><i class="glyphicon glyphicon-print"></i> Print</a>
+</div>
+
+<?php
+
+  
+?>
+
+<div class="form-group text-center">
+  <p>Fellowship Baptist College</p>
+  <p>Rizal Street, Kabankalan City</p>
+  <p><?php echo $college_name; ?></p>
 </div>
 
 <table class="table table-condensed table-striped">
@@ -40,7 +64,7 @@ td {
     <th class="text-right">Dean</th>
     <th class="text-right"><strong>Total</strong></th>
   </tr>
-  <thead>
+  </thead>
   <tbody>
     <?php
       foreach( $faculties as $fac ):
