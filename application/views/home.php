@@ -4,17 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->load->view('templates/partials/header.php'); ?>
 	<div class="brand-header">
-    	<h1><strong>Fellowship Baptist Church</strong></h1>
+			<h1><img src="<?php echo base_url();?>assets/images/fbc.png" width='90px' height='90px'><strong><font size='20px' color='ffffff'>&nbsp; FELLOWSHIP BAPTIST COLLEGE</font></strong></h1>
 	</div>
 
 	<div class="content">
-		<img src="<?php echo base_url();?>assets/images/cover.jpg" class="cover-image">
+		<img src="<?php echo base_url();?>assets/images/cover1.jpg" class="cover-image">
 		<div class="container">
 			<div class="jumbotron">
 			  <div class="row">
 					<div class="col-sm-6">
-						<h2><strong> Faculty Evaluation System </strong></h2>
-						<p> A thesis project for evaluating faculties. </p>
+							<h2><strong> Faculty Evaluation System </strong></h2>
+								<p> A thesis project for evaluating faculties. </p>
 					</div>
 					<div class="col-sm-4">
 							<div id="site-message">
