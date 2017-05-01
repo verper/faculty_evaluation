@@ -54,6 +54,10 @@ class Evaluate extends CI_Controller {
 		
 		$faculty = $this->user->data($slug);
 
+		if ( $logged_in->role == '3' && $faculty->role == '3') {
+			$form  = $this->forms->get_user_form(2); //change form to peer to peer if same program head
+		}
+
 		$this->data['title'] = $faculty->id;
 		$this->data['content'] = 'evaluate-user';
 		$this->data['faculty'] = $faculty;
@@ -74,6 +78,12 @@ class Evaluate extends CI_Controller {
 			if ( !$validate ) { redirect('evaluate'); }
 
 			$form  = $this->forms->get_user_form($logged_in->role);
+
+			$faculty_data = $this->user->data($faculty);
+			if ( $logged_in->role == '3' && $faculty_data->role == '3') {
+				$form  = $this->forms->get_user_form(2); //change form to peer to peer if same program head
+			}
+			
 			$save = $this->evaluation->process_evaluation($evaluator, $faculty, $ratings, $form, $comments);
 			if ( $save ) {
 				$fac = $this->user->data($faculty);

@@ -19,7 +19,7 @@ class User_model extends CI_Model {
         $query = $this->db->get()->result();
 
         $logged_in = $this->session->userdata('logged_in');
-        if ( $logged_in->role == '2' ) {
+        if ( $logged_in->role == '2' || $logged_in->role == '3' ) {
             $count = 0;
             foreach ( $query as $q ) {
                 if ( $q->role != '1' ) {

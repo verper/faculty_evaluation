@@ -51,14 +51,31 @@ class Evaluation_model extends CI_Model {
         }
         // program head
         elseif ( $user->role == '3' ) {
+            $this->load->model('user_model');
+
             $program = $this->db->select('*')->from('programs')->where('supervisor',$user->id)->get()->row();
             $program->courses = $this->db->select('*')->from('courses')->where('program', $program->id)->get()->result();
             if ( $program->courses ) {
                 foreach( $program->courses as $course ) {
-                    $q = $this->db->select('*')->from('users')->where('id', $course->assigned)->get()->row();
+                    $q = $this->user_model->data($course->assigned);
                     $course->assigned = $q ? $q:'';
                 }
             }
+
+            $query = $this->db->select('*')
+                                ->from('peer_peer pp')
+                                ->from('programs p')
+                                ->where('pp.source', $id)
+                                ->where('p.supervisor = pp.target')
+                                ->get()->result();
+            if ( $query ) {
+                foreach( $query as $q ) {
+                    $q2 = $this->user_model->data($q->target);
+                    $q->assigned = $q2 ? $q2:'';
+                    $program->courses[] = $q;
+                }
+            }
+
             return $program ? $program : false;
         }
         // college dean
@@ -107,6 +124,10 @@ class Evaluation_model extends CI_Model {
 
 
     function process_evaluation($evaluator, $faculty, $ratings, $form_used, $comments) {
+        foreach( $ratings as $rate ) {
+            if ( $rate > 5 || $rate < 1 ) { return false; }
+        }
+
         $data = array(
             'evaluator' => $evaluator,
             'subject' => $faculty,
@@ -117,7 +138,7 @@ class Evaluation_model extends CI_Model {
         
         // $this->db->db_debug = FALSE;
         $query = $this->db->insert('ratings', $data);
-
+        
         return $query ? true : false;
     }
 
@@ -156,7 +177,7 @@ class Evaluation_model extends CI_Model {
             if ( $query ) {
                 $schedule = date('M d, Y', strtotime($query->date));
                 $today = date('M d, Y');
-                return $schedule == $today ? true : false;
+                return $schedule <= $today ? true : false;
             }
             return false; 
         }
@@ -164,7 +185,14 @@ class Evaluation_model extends CI_Model {
             $query = $this->db->select('*')->from('programs')->where('supervisor', $evaluator)->get()->row();
             if ( $query ) {
                 $fc = $this->db->select('assigned')->from('courses')->where('program', $query->id)->where('assigned', $faculty)->get()->row();
-                return $fc ? true : false;
+                if ( $fc ) { return true; }
+            }
+
+            $query = $this->db->select('*')->from('peer_peer')->where('source',$evaluator)->where('target', $faculty)->get()->row();
+            if ( $query ) {
+                $schedule = date('M d, Y', strtotime($query->date));
+                $today = date('M d, Y');
+                return $schedule <= $today ? true : false;
             }
             return false;
         }
@@ -196,6 +224,7 @@ class Evaluation_model extends CI_Model {
 
     function validate_evaluation($evaluator, $faculty) {
         $faculty_data = $this->user->data($faculty);
+        
         if ( !$faculty_data 
             || $evaluator == $faculty_data->id 
             || $this->evaluation_access($evaluator, $faculty_data->id) == false 
@@ -280,6 +309,14 @@ class Evaluation_model extends CI_Model {
             $this->db->where('evaluator', $evaluator);
         }
 
-        return $this->db->get()->result();
+        $return = $this->db->get()->result();
+        $count = 0;
+        foreach( $return as $ret ) {
+            if ( trim($ret->comments) == '' ) {
+                unset($return[$count]);
+            }
+            $count++;
+        }
+        return $return;
     }
 }

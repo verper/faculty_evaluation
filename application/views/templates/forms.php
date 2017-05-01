@@ -36,7 +36,28 @@
       <?php foreach($forms as $form): ?>
         <tr>
           <td style="vertical-align: middle;"><?php echo $form->title;?></td>
-          <td style="vertical-align: middle;"><a class="btn btn-info btn-xs" href="<?php echo base_url();?>forms/<?php echo $form->id;?>">Edit</a> <a class="btn btn-danger btn-xs">Delete</a>
+          <td style="vertical-align: middle;">
+            <a class="btn btn-info btn-xs" href="<?php echo base_url();?>forms/<?php echo $form->id;?>">Edit</a> 
+            <a class="btn btn-danger btn-xs" data-toggle="modal" href="#remove-<?php echo $form->id;?>">Delete</a>
+            <div class="modal fade" id="remove-<?php echo $form->id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <form action="<?php echo base_url();?>forms/delete/<?php echo $form->id;?>" method="post">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Remove <?php echo $form->title;?></h4>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to remove <strong><?php echo $form->title;?></strong>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                      <input type="submit" class="btn btn-primary" value="Yes">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       <?php endforeach; ?>

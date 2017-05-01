@@ -20,7 +20,7 @@
 							<option value="2">2- Poor/Unsatisfactory</option>
 							<option value="3" selected>3- Average/Fair/Needs Improvement</option>
 							<option value="4">4- Good/Moderately Satisfactory</option>
-							<option value="6">5- Very good/ Highly Satisfactory</option>
+							<option value="5">5- Very good/ Highly Satisfactory</option>
 						</select>
 					</td>
 				</tr>
