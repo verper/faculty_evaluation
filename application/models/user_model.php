@@ -149,4 +149,27 @@ class User_model extends CI_Model {
         $query = $this->db->where('id', $id)->update('users', $data);
         return $query ? true : false;
     }
+
+
+    function get_list_by_college($dean) {
+        $data = $this->data($dean);
+        $facs = array();
+
+        $dean = $this->db->select('id')->from('colleges')->where('dean', $dean)->get()->row();
+        if ( $dean ) {
+            $ph = $this->db->select('*')->from('programs')->where('college', $dean->id)->get()->result();
+            foreach( $ph as $p ) {
+                $facs[] = $this->data($p->supervisor);
+
+                $teach = $this->db->select('assigned')->from('courses')->where('program', $p->id)->get()->result();
+                if ( $teach ) {
+                    foreach ($teach as $t) {
+                        $facs[] = $this->data($t->assigned);
+                    }
+                }
+            }
+        }
+
+        return $facs;
+    }
 }

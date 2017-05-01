@@ -296,7 +296,7 @@ class Evaluation_model extends CI_Model {
                 $total += $this->category_total($form_id, $q->id, $faculty, $evaluator='');
             }
             $overall = $total/count($query);
-            return is_float($overall) ? number_format($overall,2) : $overall;
+            return is_float($overall) ? number_format($overall,2) + 0 : $overall;
         }
         return 0;
     }

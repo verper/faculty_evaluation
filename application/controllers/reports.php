@@ -18,7 +18,7 @@ class Reports extends CI_Controller {
 		// $this->load->model('colleges');
 		// $this->load->model('programs');
 		// $this->load->model('courses');
-		// $this->load->model('user');
+		$this->load->model('user_model', 'user');
 		$this->load->model('forms_model', 'forms');
 		$this->load->model('evaluation_model', 'evaluation');
 	}
@@ -29,8 +29,24 @@ class Reports extends CI_Controller {
 	 * Dashboard view
 	 */
 	function index() {
+		$logged_in = $this->session->userdata('logged_in');
+		if ( $logged_in->role == '4' ) {
+			redirect('reports/overall');
+		}
+
+
 		$this->data['title'] = 'Reports';
 		$this->data['content'] = 'reports';
+		$this->load->view('page-user', $this->data);
+	}
+
+	function overall() {
+		$logged_in = $this->session->userdata('logged_in');
+		$faculties = $this->user->get_list_by_college($logged_in->id);
+
+		$this->data['title'] = 'Reports Overall';
+		$this->data['content'] = 'reports_overall';
+		$this->data['faculties'] = $faculties;
 		$this->load->view('page-user', $this->data);
 	}
 
