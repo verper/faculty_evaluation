@@ -8,7 +8,7 @@ gulp.task('sass', function () {
         .pipe(sassGlob())
         .pipe(sass({
             // outputStyle: 'expanded',
-            outputStyle: 'compressed'
+            // outputStyle: 'compressed'
         })
         .on('error', sass.logError))
         .pipe(autoprefixer({
