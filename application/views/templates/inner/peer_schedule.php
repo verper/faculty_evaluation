@@ -77,31 +77,12 @@
                     <div class="shortdate text-muted"><?php echo date('F, Y', strtotime($sched->date));?></div>
                 </td>
                 <td><?php echo $sched->source->lastname .', ' . $sched->source->firstname . ' ' . $sched->source->middlename;?></td>
-                <td><?php echo $sched->target->lastname .', ' . $sched->source->firstname . ' ' . $sched->source->middlename;?></td>
+                <td><?php echo $sched->target->lastname .', ' . $sched->target->firstname . ' ' . $sched->target->middlename;?></td>
                 <td class="text-center">
-                    <?php
-                      $schedule = date('M d, Y', strtotime($sched->date));
-                      $today = date('M d, Y');
-                      global $logged_in;
-                    ?>
-                    <?php if ( $schedule == $today ): ?>
-                        <?php if ($this->evaluation->evaluation_access($logged_in->id, $sched->target->id)): ?>
-                            <span class="label label-info center-block">TODAY</span>
-                        <?php else: ?>
-                            <span class="label label-success center-block">Finished</span>
-                        <?php endif; ?>
-                    <?php elseif( $schedule < $today ): ?>
-                        <?php if ($this->evaluation->evaluation_access($logged_in->id, $sched->target->id)): ?>
-                            <span class="label label-danger center-block">Expired</span>
-                        <?php else: ?>
-                            <span class="label label-success center-block">Finished</span>
-                        <?php endif; ?>
-                    <?php elseif ( $schedule > $today ): ?>
-                        <?php if ($this->evaluation->evaluation_access($logged_in->id, $sched->target->id)): ?>
-                            <span class="label label-warning center-block">Pending</span>
-                        <?php else: ?>
-                            <span class="label label-success center-block">Finished</span>
-                        <?php endif; ?>
+                    <?php if ($this->evaluation->evaluation_access($sched->source->id, $sched->target->id)): ?>
+                        <span class="label label-warning center-block">Pending</span>
+                    <?php else: ?>
+                        <span class="label label-success center-block">Finished</span>
                     <?php endif; ?>
                 </td>
                 <td><?php $modal_id = uniqid();?>

@@ -55,10 +55,12 @@
 			$evaluate = true;
 			$courses = true;
 			$users = true;
+			$reports = true;
 			break;
 		case 4:
 			$evaluate = true;
 			$evaluation = true;
+			$reports = true;
 			break;
 		case 5:
 			$colleges = true;

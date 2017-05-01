@@ -42,7 +42,7 @@ class Users extends CI_Controller {
 			$middlename = strtoupper($this->input->post('middlename'));
 
 			$logged_in = $this->session->userdata('logged_in');
-			$role = $logged_in->role != '2' ? $this->input->post('role') : '1'; //automatically set user role to student if logged in user is a faculty
+			$role = $logged_in->role == '5' ? $this->input->post('role') : '1'; //automatically set user role to student if logged in user is not an admin
 
 			$save = $this->user->add($id,$lastname,$firstname,$middlename,$role);
 			
@@ -82,7 +82,7 @@ class Users extends CI_Controller {
 			$middlename = strtoupper($this->input->post('middlename'));
 			
 			$logged_in = $this->session->userdata('logged_in');
-			$role = $logged_in->role != '2' ? $this->input->post('role') : '1'; //automatically set user role to student if logged in user is a faculty
+			$role = $logged_in->role == '5' ? $this->input->post('role') : '1'; //automatically set user role to student if logged in user is not an admin
 
 			$save = $this->user->edit($id,$new_id,$lastname,$firstname,$middlename,$role);
 			if ($save == true) {

@@ -29,12 +29,15 @@ class Evaluation extends CI_Controller {
 	 * Dashboard view
 	 */
 	function index() {
+		$peer_selection = $this->user->get_list_by_role(2); // 2 = faculty id
+		$peer_selection = (object) array_merge((array)$peer_selection, (array)$this->user->get_list_by_role(3)); // 3 = program head id
+
 		$this->data['title'] = 'Evaluation';
 		$this->data['content'] = 'evaluation';
 		$this->data['roles'] = $this->user->get_roles();
 		$this->data['forms'] = $this->forms->get_list();
 		$this->data['role_form'] = $this->forms->get_role_form();
-		$this->data['faculties'] = $this->user->get_list_by_role(2); // 2 = faculty id
+		$this->data['faculties'] = $peer_selection;
 		$this->data['schedules'] = $this->evaluation->peer_list();
 		$this->load->view('page-user', $this->data);
 	}
@@ -68,8 +71,8 @@ class Evaluation extends CI_Controller {
 				redirect('evaluation');
 			}
 			$check_role = $this->user->data($subject);
-			if ( $check_role->role != '2' ) {
-				redirect('evaluation');
+			if ( $check_role->role != '2' && $check_role->role != '3' ) {
+				redirect('evaluation/1');
 			}
 
 			$save = $this->evaluation->peer_schedule($schedule,$evaluator,$subject);
@@ -100,7 +103,7 @@ class Evaluation extends CI_Controller {
 				redirect('evaluation');
 			}
 			$check_role = $this->user->data($subject);
-			if ( $check_role->role != '2' ) {
+			if ( $check_role->role != '2' && $check_role->role != '3' ) {
 				redirect('evaluation');
 			}
 

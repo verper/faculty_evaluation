@@ -37,7 +37,7 @@
       <input class="form-control text-uppercase" type="text" name="middlename" placeholder="Middle name" value="<?php echo $middlename;?>" />
     </div>
 
-    <?php if ( $logged_in->role != '2' ) :?>
+    <?php if ( $logged_in->role == '5' ) :?>
     <div class="form-group">
       <label class="control-label">Role</label>
       <select class="form-control" name="role" required>

@@ -51,25 +51,10 @@
                 $today = date('M d, Y');
               ?>
               <p>Schedule: <?php echo $schedule == $today ? 'TODAY' : date('M d, Y', strtotime($faculty->date));?></p>
-
-              <?php if ( $schedule == $today ): ?>
-                  <?php if ($this->evaluation->evaluation_access($logged_in->id, $faculty->target->id)): ?>
-                      <a class="btn btn-primary btn-sm" href="<?php echo base_url();?>evaluate/<?php echo $faculty->target->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
-                  <?php else: ?>
-                      <span class="label label-success">Finished</span>
-                  <?php endif; ?>
-              <?php elseif( $schedule < $today ): ?>
-                  <?php if ($this->evaluation->evaluation_access($logged_in->id, $faculty->target->id)): ?>
-                      <span class="label label-danger">Expired</span>
-                  <?php else: ?>
-                      <span class="label label-success">Finished</span>
-                  <?php endif; ?>
-              <?php elseif ( $schedule > $today ): ?>
-                  <?php if ($this->evaluation->evaluation_access($logged_in->id, $faculty->target->id)): ?>
-                      <span class="label label-warning">Pending</span>
-                  <?php else: ?>
-                      <span class="label label-success">Finished</span>
-                  <?php endif; ?>
+              <?php if ($this->evaluation->evaluation_access($logged_in->id, $faculty->target->id)): ?>
+                  <a class="btn btn-primary btn-sm" href="<?php echo base_url();?>evaluate/<?php echo $faculty->target->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
+              <?php else: ?>
+                  <span class="label label-success">Finished</span>
               <?php endif; ?>
             </div>
           </div>
@@ -97,8 +82,9 @@
             </div>
             <div class="media-body">
               <h4 class="media-heading text-primary"><?php echo $faculty->assigned->lastname . ', ' . $faculty->assigned->firstname . ' '.$faculty->assigned->middlename;?></h4>
+              <h5 class="text-primary"><?php echo strtoupper($faculty->assigned->rolename);?> </h5>
               <h5><strong><?php echo $faculty->id;?></strong></h5>
-              <p><?php echo $faculty->title;?></p>
+              <h6><?php echo $faculty->title;?></h6>
               <?php if ( $this->evaluation->evaluation_access($logged_in->id, $faculty->assigned->id) ): ?>
                 <a class="btn btn-primary btn-sm" href="<?php echo base_url();?>evaluate/<?php echo $faculty->assigned->id;?>"><i class="glyphicon glyphicon-pencil"></i> Evaluate</a>
               <?php else: ?>
@@ -106,7 +92,7 @@
               <?php endif?>
             </div>
           </div>
-        </div>
+        </div>  
       <?php endforeach; ?>
     <?php else: ?>
       <div class="alert alert-warning">No faculties found for you to evaluate.</div>
