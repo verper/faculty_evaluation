@@ -2,7 +2,7 @@
         <!-- #main -->
 
         <div id="footer">
-        	<div class="copyright"> Copyrights &copy; Fellowship Baptist Church | Faculty Evaluation System</div>
+        	<div class="copyright"> 2017 Copyrights &copy; Fellowship Baptist College | Faculty Evaluation System</div>
         </div>
 
         
