@@ -1,7 +1,37 @@
-<h1 class="page-header">Reports Overall</h1>
+<style>
+@media print {
+  #toolbar {
+    display: none;
+  }
+}
+@page {
+  margin: 0.5in;
+}
+table {
+  width: 100%;
+  margin-bottom: 0;
+  font-family: arial;font-size: 12;
+}
+th {
+  text-align: left;
+}
+td {
+  border: 1px solid #eee;
+}
+.text-right {
+  text-align: right;
+}
+</style>
+
+<h1 class="page-header">Overall Reports</h1>
+
+<div class="form-group" id="toolbar">
+  <a class="btn btn-sm btn-primary" href="reports/overall/pdf" target="_blank"><i class="glyphicon glyphicon-print"></i> Print</a>
+</div>
 
 <table class="table table-condensed table-striped">
   <thead>
+  <tr>
     <th>Fullname</th>
     <th>Role</th>
     <th class="text-right">Student</th>
@@ -9,7 +39,8 @@
     <th class="text-right">Program Head</th>
     <th class="text-right">Dean</th>
     <th class="text-right"><strong>Total</strong></th>
-  </thead>
+  </tr>
+  <thead>
   <tbody>
     <?php
       foreach( $faculties as $fac ):

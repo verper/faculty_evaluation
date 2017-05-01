@@ -40,13 +40,25 @@ class Reports extends CI_Controller {
 		$this->load->view('page-user', $this->data);
 	}
 
-	function overall() {
+	function overall($slug='') {
 		$logged_in = $this->session->userdata('logged_in');
 		$faculties = $this->user->get_list_by_college($logged_in->id);
 
 		$this->data['title'] = 'Reports Overall';
 		$this->data['content'] = 'reports_overall';
 		$this->data['faculties'] = $faculties;
+		
+		if ( $slug == 'pdf' ) {
+			$this->load->library('pdf');
+			$pdf = $this->pdf->load();
+			$html=$this->load->view('templates/reports_overall',$this->data,true);	 
+			$pdf->WriteHTML($html);
+
+			// write the HTML into the PDF
+			$output = 'Overall_Reports_' . date('Y_m_d_H_i_s') . '_.pdf';
+			$pdf->Output("$output", 'I');			
+		}
+
 		$this->load->view('page-user', $this->data);
 	}
 
