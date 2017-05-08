@@ -3319,7 +3319,7 @@ tbody.collapse.in {
     box-shadow: none; }
 
 .btn .caret {
-  margin-left: 0; }
+  margin-left: 0; margin-top: -4px; }
 
 .btn-lg .caret, .btn-group-lg > .btn .caret {
   border-width: 5px 5px 0;
