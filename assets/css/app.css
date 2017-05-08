@@ -6529,7 +6529,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
   .page-home img.cover-image {
     width: 100%;
     height: 100%;
-    opacity: 0.1;
+    opacity: 0.6;
     position: fixed;
     top: 0;
     z-index: -9; }
@@ -6550,8 +6550,8 @@ html, body {
 
 @font-face {
   font-family: 'Proxima Nova Light';
-  src: url("../fonts/ProximaNova-Light.eot");
-  src: url("../fonts/ProximaNova-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/ProximaNova-Light.woff2") format("woff2"), url("../fonts/ProximaNova-Light.woff") format("woff"), url("../fonts/ProximaNova-Light.ttf") format("truetype"), url("../fonts/ProximaNova-Light.svg#proxima_nova_light") format("svg"); }
+  src: url("../fonts/proxima_nova/ProximaNova-Light.eot");
+  src: url("../fonts/proxima_nova/ProximaNova-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/proxima_nova/ProximaNova-Light.woff2") format("woff2"), url("../fonts/proxima_nova/ProximaNova-Light.woff") format("woff"), url("../fonts/proxima_nova/ProximaNova-Light.ttf") format("truetype"), url("../fonts/proxima_nova/ProximaNova-Light.svg#proxima_nova_light") format("svg"); }
 
 .main-container {
   margin-top: 20px; }

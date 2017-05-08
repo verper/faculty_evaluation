@@ -40,7 +40,7 @@ class Courses extends CI_Controller {
 			else {
 				$this->session->set_flashdata('error', 'Course code <strong>' . $code . '</strong> already exist.');
 			}
-			redirect($_SERVER['REQUEST_URI']);
+			redirect('courses');
 			exit();
 		}
 		elseif ( $this->input->post('form_id')=='edit_course' ) {
@@ -57,7 +57,7 @@ class Courses extends CI_Controller {
 			else {
 				$this->session->set_flashdata('error', 'Course code <strong>' . $code . '</strong> already exist.');
 			}
-			redirect($_SERVER['REQUEST_URI']);
+			redirect('courses');
 			exit();
 		}
 

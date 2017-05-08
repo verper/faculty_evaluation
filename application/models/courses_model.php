@@ -43,6 +43,8 @@ class Courses_model extends CI_Model {
   public function add($code,$title, $faculty, $program) {
     if ( $this->code_exist($code) ) return false;
     
+    $code = trim($code);
+    $code = str_replace(' ','',$code);
     $data = array(
       'id' => $code,
       'title' => $title,
@@ -58,6 +60,8 @@ class Courses_model extends CI_Model {
   public function edit($id,$code,$title, $faculty, $program) {
     if ($id != $code && $this->code_exist($code)) return false;
 
+    $code = trim($code);
+    $code = str_replace(' ','',$code);
     $data = array(
         'id' => $code,
         'title' => $title,

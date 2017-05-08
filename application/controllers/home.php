@@ -38,7 +38,7 @@ class Home extends CI_Controller {
 			}
 		}
 		
-		$this->data['title'] = 'Fellowshop Baptist Church';
+		$this->data['title'] = 'FBC';
 		$this->load->view('home', $this->data);
 	}
 

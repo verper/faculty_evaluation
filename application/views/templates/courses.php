@@ -5,7 +5,7 @@
 <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="addNewModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form class="form" method="post">
+      <form class="form" method="post" action="">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">New Course</h4>
@@ -18,7 +18,7 @@
 
             <div class="form-group">
               <label>Course Title</label>
-              <input class="form-control text-uppercase" type="text" name="title" placeholder="Course title" required/>
+              <input class="form-control text-uppercase" type="text" name="title" placeholder="Course Title" required/>
             </div>
 
             <div class="form-group">
