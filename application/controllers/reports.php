@@ -64,19 +64,31 @@ class Reports extends CI_Controller {
 		$this->load->view('page-user', $this->data);
 	}
 
-	function pdf() {
-		// var_dump($this->input->post()); exit();
-		if ( $this->input->post('form_id') == 'pdf_report' ) {
-			$form = $this->forms->get_user_form($this->input->post('form'));
-			$logged_in = $this->session->userdata('logged_in');
-			$this->data['form']  = $form;
-			$this->data['logged_in'] = $logged_in;
-		}
-		else {
+	function pdf($fac_id='', $form_id='') {
+		$logged_in = $this->session->userdata('logged_in');
+		$user = '';
+		
+		if ( !empty($fac_id) && !empty($form_id) && $logged_in->role != '4') {
 			redirect('reports');
 		}
+		if ( !empty($fac_id) && !empty($form_id) && $logged_in->role == '4' ) {
+			$form = $this->forms->get_user_form($form_id);
+			$this->data['form']  = $form;
+			$user = $this->user->data($fac_id);
+			$this->data['logged_in'] = $user;			
+		}
 
-		$this->data['title'] = $logged_in->lastname . ' - ' . $form->form->title;
+		if ( $this->input->post('form_id') == 'pdf_report' ) {
+			$form = $this->forms->get_user_form($this->input->post('form'));
+			$user = $logged_in;
+			$this->data['form']  = $form;
+			$this->data['logged_in'] = $user;
+		}
+		else {
+			if ( $logged_in->role != '4' ) { redirect('reports'); }
+		}
+
+		$this->data['title'] = $user->lastname . ' - ' . $form->form->title;
 
 		$this->load->library('pdf');
 		$pdf = $this->pdf->load();
@@ -84,7 +96,20 @@ class Reports extends CI_Controller {
 		$pdf->WriteHTML($html);
 
 		// write the HTML into the PDF
-		$output = $logged_in->lastname . '_' . $form->form->title . '_' . date('Y_m_d_H_i_s') . '_.pdf';
+		$output = $user->lastname . '_' . $form->form->title . '_' . date('Y_m_d_H_i_s') . '_.pdf';
 		$pdf->Output("$output", 'I');
+	}
+
+
+	function faculty() {
+		$logged_in = $this->session->userdata('logged_in');
+		$college = $this->db->select('title')->from('colleges')->where('dean', $logged_in->id)->get()->row();
+		$faculties = $this->user->get_list_by_college($logged_in->id);
+
+		$this->data['title'] = 'View per report';
+		$this->data['content'] = 'reports_faculty';
+		$this->data['faculties'] = $faculties;
+		$this->data['college_name'] = $college ? $college->title : '';
+		$this->load->view('page-user', $this->data);
 	}
 }

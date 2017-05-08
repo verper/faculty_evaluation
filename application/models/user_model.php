@@ -161,7 +161,7 @@ class User_model extends CI_Model {
             foreach( $ph as $p ) {
                 $facs[] = $this->data($p->supervisor);
 
-                $teach = $this->db->select('assigned')->from('courses')->where('program', $p->id)->get()->result();
+                $teach = $this->db->select('assigned')->from('courses')->where('program', $p->id)->where('assigned !=', $p->supervisor)->get()->result();
                 if ( $teach ) {
                     foreach ($teach as $t) {
                         $facs[] = $this->data($t->assigned);

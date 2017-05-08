@@ -8,7 +8,7 @@
     font-family: arial;font-size: 12;
   }
   h1 {
-    font-size: 24px;
+    font-family: arial;font-size: 14;
   }
 }
 @page {
@@ -36,10 +36,13 @@ p {
 }
 </style>
 
-<h1 class="page-header">Overall Reports</h1>
+<h1 class="page-header">Overall Report</h1>
 
-<div class="form-group" id="toolbar">
-  <a class="btn btn-sm btn-primary" href="reports/overall/pdf" target="_blank"><i class="glyphicon glyphicon-print"></i> Print</a>
+<div class="row form-group" id="toolbar">
+  <div class="col-xs-12">
+    <a class="btn btn-sm btn-primary" href="reports/overall/pdf" target="_blank"><i class="glyphicon glyphicon-print"></i> Print</a>
+    <a class="btn btn-sm btn-primary pull-right" href="reports/faculty"><i class="glyphicon glyphicon-eye-open"></i> View per faculty</a>
+  </div>
 </div>
 
 <?php
