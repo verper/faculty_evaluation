@@ -3,6 +3,7 @@
 <div class="page-header">
   <h1><?php echo $course->id;?></h1>
   <h4><?php echo $course->title;?></h4>
+  <h5>Instructor: <?php echo $course->faculty->lastname . ', ' . $course->faculty->firstname . ' ' . $course->faculty->middlename;?></h5>
 </div>
 
 <div class="row">

@@ -30,7 +30,6 @@
                       <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu pull-right">
-                      <li><a class=""><i class="glyphicon glyphicon-eye-open"></i> View </a></li>
                       <li><a class="" title="Edit" href="<?php echo base_url();?>users/edit/<?php echo $user->id;?>"><i class="glyphicon glyphicon-pencil"></i> Edit</a></li>
                       <li><a class="" title="Remove" href="#remove-<?php echo $user->id;?>" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i> Delete</a></li>
                      </ul>
