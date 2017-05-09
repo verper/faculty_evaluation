@@ -74,6 +74,7 @@
 			$users = true;
 			$forms = true;
 			$evaluation = true;
+			$reports = true;
 			break;
 	}
 ?>
