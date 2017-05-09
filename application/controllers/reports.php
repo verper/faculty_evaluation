@@ -68,7 +68,7 @@ class Reports extends CI_Controller {
 		$logged_in = $this->session->userdata('logged_in');
 		$user = '';
 		
-		if ( !empty($fac_id) && !empty($form_id) && ($logged_in->role != '4' || $logged_in->role != '5')) {
+		if ( !empty($fac_id) && !empty($form_id) && ($logged_in->role != '4' && $logged_in->role != '5')) {
 			redirect('reports');
 		}
 		if ( !empty($fac_id) && !empty($form_id) && ($logged_in->role == '4' || $logged_in->role == '5') ) {
@@ -85,7 +85,7 @@ class Reports extends CI_Controller {
 			$this->data['logged_in'] = $user;
 		}
 		else {
-			if ( $logged_in->role != '4' || $logged_in->role != '5' ) { redirect('reports'); }
+			if ( $logged_in->role != '4' && $logged_in->role != '5' ) { redirect('reports'); }
 		}
 
 		$this->data['title'] = $user->lastname . ' - ' . $form->form->title;

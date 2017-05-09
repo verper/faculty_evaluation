@@ -38,7 +38,8 @@
         $dean = '<a class="btn btn-primary btn-sm" href="reports/pdf/'.$fac->id.'/4" target="_blank"><i class="glyphicon glyphicon-print"></i> Print</a>';
 
         if ( $fac->role == '3' ) {
-          $prog = 'n/a';
+          $stud = 'NA';
+          $prog = 'NA';
         }
     ?>
     <tr>

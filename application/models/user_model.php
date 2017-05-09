@@ -157,7 +157,7 @@ class User_model extends CI_Model {
 
         $logged_in = $this->session->userdata('logged_in');
         if ( $logged_in->role == 5 ) {
-            $list = $this->db->select('id')->from('users')->where('role != 1')->where('role != 4')->where('role != 5')->order_by('role','DESC')->get()->result();
+            $list = $this->db->select('id')->from('users')->where('role = 2')->order_by('role','DESC')->get()->result();
             foreach( $list as $l ) {
                 $facs[] = $this->data($l->id);
             }
@@ -167,7 +167,7 @@ class User_model extends CI_Model {
             if ( $dean ) {
                 $ph = $this->db->select('*')->from('programs')->where('college', $dean->id)->get()->result();
                 foreach( $ph as $p ) {
-                    $facs[] = $this->data($p->supervisor);
+                    // $facs[] = $this->data($p->supervisor);
 
                     $teach = $this->db->select('assigned')->from('courses')->where('program', $p->id)->where('assigned !=', $p->supervisor)->get()->result();
                     if ( $teach ) {
