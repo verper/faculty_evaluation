@@ -27,6 +27,7 @@ class Colleges extends CI_Controller {
 	function index() {
 		if ( $this->input->post('form_id')=='new_college' ) {
 			$code = strtoupper($this->input->post('code'));
+			$code = str_replace(' ','', $code);
 			$title = strtoupper($this->input->post('college'));
 			$dean = $this->input->post('dean');
 
@@ -45,6 +46,7 @@ class Colleges extends CI_Controller {
 		}
 		elseif ( $this->input->post('form_id')=='edit_college' ) {
 			$new_id = strtoupper($this->input->post('code'));
+			$new_id = str_replace(' ','', $new_id);
 			$title = strtoupper($this->input->post('college'));
 			$dean = $this->input->post('dean');
 			$id = $this->input->post('college_id');

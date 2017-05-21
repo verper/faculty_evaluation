@@ -2,6 +2,7 @@
 <?php global $logged_in; ?>
 
 <legend>Profile</legend>
+
 <form class="form-horizontal" method="post" action="<?php echo base_url();?>profile/update" enctype="multipart/form-data">
   <div class="form-group row">
     <label class="control-label col-sm-2"></label>
@@ -22,6 +23,7 @@
     </div>
   </div>
 
+  <?php if ($logged_in->role == '5'): ?>
   <div class="form-group row">
     <label class="control-label col-sm-2">User ID (School ID)</label>
     <div class="col-sm-10">
@@ -49,6 +51,7 @@
       <input class="form-control" type="text" name="middlename" placeholder="Middle name" value="<?php echo $logged_in->middlename;?>" >
     </div>
   </div>
+  <?php endif;?>
 
   <div class="form-group row">
     <label class="control-label col-sm-2">&nbsp;</label>

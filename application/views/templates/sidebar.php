@@ -47,23 +47,17 @@
 			break;
 		case 2:
 			$evaluate = true;
-			$courses = true;
-			$users = true;
 			$reports = true;
 			break;
 		case 3:
 			$evaluate = true;
-			$colleges = true;
-			$programs = true;
-			$courses = true;
-			$users = true;
 			$reports = true;
 			break;
 		case 4:
 			$evaluate = true;
-			$colleges = true;
-			$programs = true;
-			$courses = true;
+			// $colleges = true;
+			// $programs = true;
+			// $courses = true;
 			$evaluation = true;
 			$reports = true;
 			break;

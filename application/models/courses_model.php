@@ -92,23 +92,55 @@ class Courses_model extends CI_Model {
   }
 
   function get_course_students($course) {
-    $query = $this->db->select('*')
-                      ->from('course_load')
-                      ->where('course', $course)
-                      ->get()->result();
-                      
-    if ( $query ) {
-      foreach( $query as $que ) {
-        $q = $this->db->select('id,lastname,firstname,middlename,role')
-                      ->from('users')
-                      ->where('id', $que->student)
-                      ->get()->row();
-
-        $que->user = $q ? $q : '';
-      }
+    $this->db->select('users.*, roles.title as rolename');
+    $this->db->from('users');
+    $this->db->join('roles', 'users.role = roles.id');
+    $this->db->where('role','1');
+    $this->db->order_by('users.lastname', 'ASC');
+    
+    if ( isset($_GET['p']) && $_GET['p'] ) {
+        $this->db->like('users.id', $_GET['p']);
+        $this->db->or_like('users.lastname', $_GET['p']);
+        $this->db->or_like('users.firstname', $_GET['p']);
+        $this->db->or_like('users.middlename', $_GET['p']);
+        $this->db->or_like('roles.title', $_GET['p']);
     }
 
-    return $query ? $query : false;
+    $query = $this->db->get()->result();
+    $count = 0;
+    foreach( $query as $q ) {
+      if ( $this->course_student($course, $q->id) == false) {
+        unset($query[$count]);
+      }
+      $count++;
+    }
+    return $query;   
+  }
+
+  function get_course_not_students($course) {
+    $this->db->select('users.*, roles.title as rolename');
+    $this->db->from('users');
+    $this->db->join('roles', 'users.role = roles.id');
+    $this->db->where('role','1');
+    $this->db->order_by('users.lastname', 'ASC');
+    
+    if ( isset($_GET['q']) && $_GET['q'] ) {
+        $this->db->like('users.id', $_GET['q']);
+        $this->db->or_like('users.lastname', $_GET['q']);
+        $this->db->or_like('users.firstname', $_GET['q']);
+        $this->db->or_like('users.middlename', $_GET['q']);
+        $this->db->or_like('roles.title', $_GET['q']);
+    }
+
+    $query = $this->db->get()->result();
+    $count = 0;
+    foreach( $query as $q ) {
+      if ( $this->course_student($course, $q->id) ) {
+        unset($query[$count]);
+      }
+      $count++;
+    }
+    return $query;    
   }
 
 
@@ -161,5 +193,15 @@ class Courses_model extends CI_Model {
     }
 
     return false;
+  }
+
+  function course_student($course, $student) {
+    $this->db->select('*');
+    $this->db->from('course_load');
+    $this->db->where('course', $course);
+    $this->db->where('student', $student);
+
+    $query = $this->db->get()->row();
+    return $query ? true : false;
   }
 }

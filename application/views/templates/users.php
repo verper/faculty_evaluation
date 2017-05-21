@@ -1,4 +1,7 @@
-<h1 class="page-header">Users <a class="btn btn-primary pull-right" href="<?php echo base_url();?>users/add">Add</a></h1>
+<h1 class="page-header">
+  Users 
+  <a class="btn btn-primary pull-right" href="<?php echo base_url();?>users/add" style="margin-right: 5px;">Add</a>
+</h1>
 
 <?php $this->load->view('templates/inner/search_filter.php'); ?>
 

@@ -73,7 +73,7 @@ class User_model extends CI_Model {
         $new_id = str_replace(' ', '', $new_id);
 
         $data = array(
-            'id' => $new_id,
+            'id' => $new_id ? $new_id : '',
             // 'password' => md5($id),
             'lastname' => $lastname,
             'firstname' => $firstname,
@@ -118,6 +118,15 @@ class User_model extends CI_Model {
         $this->db->from('users');
         $this->db->join('roles', 'users.role = roles.id');
         $this->db->where('users.role', $id);
+        
+        if ( isset($_GET['q']) && $_GET['q'] ) {
+            $this->db->like('users.id', $_GET['q']);
+            $this->db->or_like('users.lastname', $_GET['q']);
+            $this->db->or_like('users.firstname', $_GET['q']);
+            $this->db->or_like('users.middlename', $_GET['q']);
+            $this->db->or_like('roles.title', $_GET['q']);
+        }
+
         $this->db->order_by('users.lastname', 'ASC');
         $query = $this->db->get()->result();
 

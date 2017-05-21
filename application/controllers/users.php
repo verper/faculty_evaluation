@@ -37,6 +37,7 @@ class Users extends CI_Controller {
 	function add() {
 		if ( $this->input->post('form_id')=='new_user' ) {
 			$id = $this->input->post('userid');
+			$id = str_replace(' ','',$id);
 			$lastname = strtoupper($this->input->post('lastname'));
 			$firstname = strtoupper($this->input->post('firstname'));
 			$middlename = strtoupper($this->input->post('middlename'));
@@ -76,6 +77,7 @@ class Users extends CI_Controller {
 
 		if ( $this->input->post('form_id')=='edit_user' ) {
 			$id = $this->input->post('user_id');
+			$id = str_replace(' ','',$id);
 			$new_id = $this->input->post('userid');
 			$lastname = strtoupper($this->input->post('lastname'));
 			$firstname = strtoupper($this->input->post('firstname'));

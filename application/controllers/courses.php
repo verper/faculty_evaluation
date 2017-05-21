@@ -29,6 +29,7 @@ class Courses extends CI_Controller {
 	function index() {
 		if ( $this->input->post('form_id')=='new_course' ) {
 			$code = strtoupper($this->input->post('code'));
+			$code = str_replace(' ', '', $code);
 			$title = strtoupper($this->input->post('title'));
 			$faculty = $this->input->post('faculty');
 			$program = $this->input->post('program');
@@ -46,6 +47,7 @@ class Courses extends CI_Controller {
 		elseif ( $this->input->post('form_id')=='edit_course' ) {
 			$id = strtoupper($this->input->post('course_id'));
 			$code = strtoupper($this->input->post('code'));
+			$code = str_replace(' ', '', $code);
 			$title = strtoupper($this->input->post('title'));
 			$faculty = $this->input->post('faculty');
 			$program = $this->input->post('program');
@@ -102,7 +104,8 @@ class Courses extends CI_Controller {
 		$this->data['content'] = 'students';
 		$this->data['course'] = $this->courses->data($code);
 		$this->data['present'] = $present;
-		$this->data['students'] = $this->user->get_list_by_role(1); // student role code
+		// $this->data['students'] = $this->user->get_list_by_role(1); // student role code
+		$this->data['students'] = $this->courses->get_course_not_students($code); // student role code
 		$this->load->view('page-user', $this->data);
 	}
 
@@ -142,5 +145,91 @@ class Courses extends CI_Controller {
 			redirect('courses/' . $course);
 		}
 		redirect('courses');
+	}
+
+	function bulk() {
+		if ( $this->input->post('form_id') == 'bulk_users' ) {
+			$course = $this->input->post('course_id');
+
+            $config['upload_path']          = './media/files/';
+            $config['allowed_types']        = 'csv';
+
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('bulk_add_file'))
+            {
+            	$msg = '';
+                $error = array('error' => $this->upload->display_errors());
+                foreach( $error as $e ) {
+                	$msg .= $e;
+                }
+                $this->session->set_flashdata('error', $msg);
+
+                redirect('courses/' . $course);
+            }
+            else
+            {
+            	$this->load->model('user_model','user');
+            	$this->load->model('courses_model','courses');
+            	$msg = '';
+
+                $data = array('upload_data' => $this->upload->data());
+                $full_path = $data["upload_data"]['full_path'];
+
+
+		        $this->load->library('csvreader');
+		        $result =   $this->csvreader->parse_file($full_path);//path to csv file
+                foreach( $result as $count => $field ) {
+                	$submitted_id = $field['id'];
+                	$id = $field['id'] ? $field['id'] : uniqid();
+                	$lastname = $field['lastname'] ? $field['lastname'] : '';
+                	$firstname = $field['firstname'] ? $field['firstname'] : '';
+                	$middlename = $field['middlename'] ? $field['middlename'] : '';
+                	$role = '1';//student role code
+
+                	$check_id = $this->user->check_userid($id);
+                	if ( $check_id ) {
+                		$student_on_course = $this->courses->course_student($course, $id);
+                		if ( $student_on_course ) {
+                			$msg .= '<br/><i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;<strong>'.$id.' - '.$lastname.', '.$firstname.' '.$middlename.'</strong> is already on the course.';
+                		}
+                		else {
+                			$save = $this->courses->add_student($course, $id);
+                			$msg .= '<br/><i class="glyphicon glyphicon-ok text-success"></i> &nbsp;<strong>'.$id.' - '.$lastname.', '.$firstname.' '.$middlename.'</strong> has been added.';
+                		}
+                		$this->session->set_flashdata('info', $msg);
+                		continue;
+                	}
+
+                	$id_exist = false;
+                	while($check_id) {
+                		$id_exist = true;
+                		$id = uniqid();
+                		$check_id = $this->user->check_userid($id);
+                	}
+
+                	if ( $id_exist ) {
+                		$msg .= '<br/><i class="glyphicon glyphicon-ok text-success"></i> &nbsp;<strong>' . $submitted_id . '</strong> already exist <strong>'.$id.'</strong> has been used temporarily.';
+                	}
+
+                	$save = $this->user->add($id,$lastname,$firstname,$middlename,$role);
+
+                	if ( $save ) {
+                		$this->courses->add_student($course, $id);
+                		$msg .= '<br/><i class="glyphicon glyphicon-ok text-success"></i> &nbsp;<strong>'.$id.' - '.$lastname.', '.$firstname.' '.$middlename.'</strong> has been added.';
+                	}
+                	else {
+                		$msg .= '<br/><i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;<strong>'.$id.' - '.$lastname.', '.$firstname.' '.$middlename.'</strong> has been failed.';
+                	}
+
+                	$this->session->set_flashdata('info', $msg);
+                }
+
+                unlink($full_path);
+                redirect('courses/' . $course);
+            }
+		}
+
+		redirect('courses/' . $course);
 	}
 }

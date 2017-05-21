@@ -29,6 +29,7 @@ class Programs extends CI_Controller {
 	function index() {
 		if ( $this->input->post('form_id')=='new_program' ) {
 			$code = strtoupper($this->input->post('code'));
+			$code = str_replace(' ','',$code);
 			$title = strtoupper($this->input->post('program'));
 			$supervisor = $this->input->post('supervisor');
 			$college = $this->input->post('college');
@@ -51,6 +52,7 @@ class Programs extends CI_Controller {
 			$supervisor = $this->input->post('supervisor');
 			$college = $this->input->post('college');
 			$new_id = $this->input->post('code');
+			$new_id = str_replace(' ','',$new_id);
 			$id = $this->input->post('program_id');
 
 			if ( null == $this->programs->data($id) ) {
