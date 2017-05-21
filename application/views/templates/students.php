@@ -24,7 +24,7 @@
                 <input class="form-control" type="file" name="bulk_add_file">
               </div>
               <div class="form-group">
-                <a class="btn-link" href=""><i class="glyphicon glyphicon-download-alt"></i> Download sample csv file or edit this file and upload</a>
+                <a class="btn-link" href="media/files/sample.csv"><i class="glyphicon glyphicon-download-alt"></i> Download sample csv file or edit this file and upload</a>
               </div>
               <div class="form-group">
                 <p><i class="glyphicon glyphicon-exclamation-sign"></i> New students from the uploaded list will be automatically added to the system.</p>
