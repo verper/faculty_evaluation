@@ -301,8 +301,8 @@ class Evaluation_model extends CI_Model {
         return 0;
     }
 
-    function get_comments($faculty, $evaluator='') {
-        $this->db->select('comments');
+    function get_comments($faculty, $evaluator='', $type='') {
+        $this->db->select('evaluator, comments');
         $this->db->from('ratings');
         $this->db->where('subject', $faculty);
         if( $evaluator != '' ) {
@@ -311,12 +311,50 @@ class Evaluation_model extends CI_Model {
 
         $return = $this->db->get()->result();
         $count = 0;
+        if ($type != '') {
+            $this->load->model('user_model','user');
+        }
         foreach( $return as $ret ) {
+            if ( $type != '' ) {
+                $u = $this->user->data($ret->evaluator);
+                if ( $u->role != $type ) {
+                    unset($return[$count]); 
+                    $count++; 
+                    continue; 
+                }
+            }
+
             if ( trim($ret->comments) == '' ) {
                 unset($return[$count]);
             }
             $count++;
         }
         return $return;
+    }
+
+    function respondents($faculty, $type='all') {
+        if ( $type == 'all' ) {
+            $this->db->select('count(subject) as respondents');
+            $this->db->from('ratings');
+            $this->db->where('subject', $faculty);
+            $q = $this->db->get()->row();
+            return $q->respondents;
+        }
+        else {
+            $this->load->model('user_model', 'user');
+            $respondents = 0;
+
+            $this->db->select('evaluator as e');
+            $this->db->from('ratings');
+            $this->db->where('subject', $faculty);
+            $query = $this->db->get()->result();
+            foreach( $query as $q ) {
+                $u = $this->user->data($q->e);
+                if ( $u->role == $type ) {
+                    $respondents++;
+                }
+            }
+            return $respondents;
+        }
     }
 }

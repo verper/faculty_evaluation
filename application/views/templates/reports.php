@@ -33,13 +33,11 @@
 
 <?php if ($form): ?>
   <form action="<?php echo base_url();?>reports/pdf" method="post" style="display:inline-block" target="_blank">
-    <input type="hidden" name="form_id" value="pdf_report">
-    <input type="hidden" name="form" value="1">
     <div class="form-group">
-      <button class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-print"></i> Print ratings</button>
+      <a class="btn btn-primary btn-sm" href="reports/pdf/<?php echo $logged_in->id;?>/<?php echo $fid;?>" target="_blank"><i class="glyphicon glyphicon-print"></i> Print ratings</a>
     </div>
   </form>
-  <form action="" method="post" style="display:inline-block">
+  <form action="" method="post" style="display:none">
     <input type="hidden" name="form_id" value="pdf_comments">
     <input type="hidden" name="form" value="1">
     <div class="form-group">

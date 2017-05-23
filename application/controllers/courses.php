@@ -232,4 +232,121 @@ class Courses extends CI_Controller {
 
 		redirect('courses/' . $course);
 	}
+
+	function bulk_course() {
+		if ( $this->input->post('form_id') == 'bulk_course' ) {
+			$course = $this->input->post('course_id');
+
+            $config['upload_path']          = './media/files/';
+            $config['allowed_types']        = 'csv';
+
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('bulk_add_file'))
+            {
+            	$msg = '';
+                $error = array('error' => $this->upload->display_errors());
+                foreach( $error as $e ) {
+                	$msg .= $e;
+                }
+                $this->session->set_flashdata('error', $msg);
+
+                redirect('courses');
+            }
+            else
+            {
+            	$this->load->model('user_model','user');
+            	$this->load->model('courses_model','courses');
+            	$msg = '';
+
+                $data = array('upload_data' => $this->upload->data());
+                $full_path = $data["upload_data"]['full_path'];
+
+
+		        $this->load->library('csvreader');
+		        $result =   $this->csvreader->parse_file($full_path);//path to csv file
+		        
+                foreach( $result as $count => $field ) {
+                	if ( !isset($field["code"]) ) {
+                		$this->session->set_flashdata('error', 'There was an error occured please try again.<br>Please try downloading and edit the sample csv file.');
+                		unlink($full_path);
+                		redirect('courses');
+                	}
+
+                	$id = strtoupper($field['code']);
+                	$id = str_replace(' ', '', trim($id));
+                	$title = strtoupper(trim($field['title']));
+                	$f_ID = $field['faculty_ID'];
+                	$lastname = $field['faculty_LASTNAME'];
+                	$firstname = $field['faculty_FIRSTNAME'];
+                	$middlename = $field['faculty_MIDDLENAME'];
+                	$role = '2';
+                	$program = strtoupper($field['program']);
+                	$program = str_replace(' ', '', trim($program));
+
+                	$check_code = $this->courses->code_exist($id);
+                	if ( $check_code ) {
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code <strong>'.$id.'</strong> already exist.';
+            			continue;
+                	}
+                	if (empty($id)) {
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code is required.';
+            			continue;
+                	}
+                	if (empty($title)) {
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Title is required.';
+            			continue;
+                	}
+                	if (empty($program)) {
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Program is required.';
+            			continue;
+                	}
+                	$program_exist = $this->programs->code_exist($program);
+                	if ( $program_exist == false ) {
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Program<strong>'.$program.'</strong> did not exist in programs.';
+            			continue;
+                	}
+                	if (empty($f_ID)) {
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Faculty ID is required.';
+            			continue;
+                	}
+                	$fac_exists = $this->user->data($f_ID);
+                	if ( $fac_exists ) {
+                		if ( $fac_exists->role == '1' || $fac_exists->role == '5' ) {
+                			$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;An error has occured in Code '.$id.'. Pleace check the entered fields then try again.';
+                		}
+                		else {
+	                		$save_course = $this->courses->add($id,$title, $f_ID, $program);
+	                		if ( $save_course ) {
+	            				$msg .= '<i class="glyphicon glyphicon-ok text-success"></i> &nbsp;Code '.$id.' has been added successfully.';
+	            			}
+	            			else {
+	            				$this->user->delete($f_ID);
+	            				$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' has been failed.';
+	            			}
+                		}
+                	}
+                	else {
+                		$save = $this->user->add($f_ID,$lastname,$firstname,$middlename,$role);
+                		if ( $save ) {
+                			$save_course = $this->courses->add($id,$title, $f_ID, $program);
+                			if ( $save_course ) {
+                				$msg .= '<i class="glyphicon glyphicon-ok text-success"></i> &nbsp;Code '.$id.' has been added successfully.';
+                			}
+                			else {
+                				$this->user->delete($f_ID);
+                				$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' has been failed.';
+                			}
+                		}
+                	}
+                }
+                $this->session->set_flashdata('info', $msg);
+
+                unlink($full_path);
+                redirect('courses');
+            }
+		}
+
+		redirect('courses');
+	}
 }

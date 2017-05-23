@@ -63,6 +63,7 @@ $route['logout'] = "home/logout";
 $route['courses/add_student'] = "courses/add_student";
 $route['courses/remove_student'] = "courses/remove_student";
 $route['courses/bulk'] = "courses/bulk";
+$route['courses/bulk_course'] = "courses/bulk_course";
 $route['courses/(:any)'] = "courses/course_student_list/$1";
 
 $route['users/add'] = "users/add";

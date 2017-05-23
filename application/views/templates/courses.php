@@ -1,4 +1,39 @@
-<h1 class="page-header">Courses <a class="btn btn-primary pull-right" href="#addNewModal" data-toggle="modal">Add</a></h1>
+<h1 class="page-header">
+  Courses 
+  <a class="btn btn-primary pull-right" href="#add-bulk" data-toggle="modal">Add Bulk</a>
+  <a class="btn btn-primary pull-right" href="#addNewModal" data-toggle="modal">Add</a>
+</h1>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="add-bulk">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Upload bulk courses</h4>
+      </div>
+      <form action="courses/bulk_course" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Upload CSV file</label>
+            <input class="form-control" type="file" name="bulk_add_file">
+          </div>
+          <div class="form-group">
+            <a class="btn-link" href="media/files/sample-courses.csv"><i class="glyphicon glyphicon-download-alt"></i> Download sample csv file or edit this file and upload</a>
+          </div>
+          <div class="form-group">
+            <p><i class="glyphicon glyphicon-exclamation-sign"></i> &nbsp;Make sure Program enetered is already an existing program. Only the program ID is needed.</p>
+            <p><i class="glyphicon glyphicon-exclamation-sign"></i> &nbsp;Make sure all fields are not leave empty except for middl name because it is optional.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <input class="btn btn-primary" type="submit" value="Upload">
+          <input type="hidden" name="form_id" value="bulk_course">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <?php $this->load->view('templates/inner/search_filter.php'); ?>
 

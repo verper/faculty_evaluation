@@ -204,4 +204,11 @@ class Courses_model extends CI_Model {
     $query = $this->db->get()->row();
     return $query ? true : false;
   }
+
+  function courses_handled ($faculty) {
+    $this->db->select('id');
+    $this->db->from('courses');
+    $this->db->where('assigned', $faculty);
+    return $this->db->get()->result();
+  }
 }

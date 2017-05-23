@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -6649,3 +6649,9 @@ option {
     box-shadow: none; }
     .tgl-ios:checked + .tgl-btn:active:after {
       margin-left: -.8em; }
+
+
+
+.btn.pull-right + .btn.pull-right {
+    margin-right: 5px;
+}

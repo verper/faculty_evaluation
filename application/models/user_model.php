@@ -53,9 +53,9 @@ class User_model extends CI_Model {
         $data = array(
             'id' => $id,
             'password' => md5($id),
-            'lastname' => $lastname,
-            'firstname' => $firstname,
-            'middlename' => $middlename,
+            'lastname' => strtoupper($lastname),
+            'firstname' => strtoupper($firstname),
+            'middlename' => strtoupper($middlename),
             'role' => $role,
         );
 
@@ -75,9 +75,9 @@ class User_model extends CI_Model {
         $data = array(
             'id' => $new_id ? $new_id : '',
             // 'password' => md5($id),
-            'lastname' => $lastname,
-            'firstname' => $firstname,
-            'middlename' => $middlename,
+            'lastname' => strtoupper($lastname),
+            'firstname' => strtoupper($firstname),
+            'middlename' => strtoupper($middlename),
             'role' => $role
         );
 
@@ -118,7 +118,7 @@ class User_model extends CI_Model {
         $this->db->from('users');
         $this->db->join('roles', 'users.role = roles.id');
         $this->db->where('users.role', $id);
-        
+
         if ( isset($_GET['q']) && $_GET['q'] ) {
             $this->db->like('users.id', $_GET['q']);
             $this->db->or_like('users.lastname', $_GET['q']);

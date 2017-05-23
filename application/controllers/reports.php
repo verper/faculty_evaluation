@@ -17,7 +17,7 @@ class Reports extends CI_Controller {
 
 		$this->load->model('colleges_model', 'colleges');
 		// $this->load->model('programs');
-		// $this->load->model('courses');
+		$this->load->model('courses_model', 'courses');
 		$this->load->model('user_model', 'user');
 		$this->load->model('forms_model', 'forms');
 		$this->load->model('evaluation_model', 'evaluation');
@@ -67,28 +67,46 @@ class Reports extends CI_Controller {
 	function pdf($fac_id='', $form_id='') {
 		$logged_in = $this->session->userdata('logged_in');
 		$user = '';
-		
-		if ( !empty($fac_id) && !empty($form_id) && ($logged_in->role != '4' && $logged_in->role != '5')) {
+
+		if ( $logged_in->role=='2' && $logged_in->id != $fac_id ) {
 			redirect('reports');
 		}
-		if ( !empty($fac_id) && !empty($form_id) && ($logged_in->role == '4' || $logged_in->role == '5') ) {
+		if ( !empty($fac_id) && !empty($form_id) && ($logged_in->role != '2' && $logged_in->role != '4' && $logged_in->role != '5')) {
+			redirect('reports');
+		}
+		if ( !empty($fac_id) && !empty($form_id) && ($logged_in->role == '2' || $logged_in->role == '4' || $logged_in->role == '5') ) {
 			$form = $this->forms->get_user_form($form_id);
 			$this->data['form']  = $form;
 			$user = $this->user->data($fac_id);
 			$this->data['logged_in'] = $user;			
 		}
 
-		if ( $this->input->post('form_id') == 'pdf_report' ) {
-			$form = $this->forms->get_user_form($this->input->post('form'));
-			$user = $logged_in;
-			$this->data['form']  = $form;
-			$this->data['logged_in'] = $user;
-		}
-		else {
-			if ( $logged_in->role != '4' && $logged_in->role != '5' ) { redirect('reports'); }
-		}
+		// if ( $this->input->post('form_id') == 'pdf_report' ) {
+		// 	$form = $this->forms->get_user_form($this->input->post('form'));
+		// 	$user = $logged_in;
+		// 	$this->data['form']  = $form;
+		// 	$this->data['logged_in'] = $user;
+		// }
+		// else {
+		// 	if ( $logged_in->role != '4' && $logged_in->role != '5' ) { redirect('reports'); }
+		// }
 
 		$this->data['title'] = $user->lastname . ' - ' . $form->form->title;
+		$this->data['comments'] = $this->evaluation->get_comments($fac_id, '', $form_id);
+		$head = array(
+			'1' => 'Student',
+			'2' => 'Peer',
+			'3' => 'Program Head',
+			'4' => 'Dean',
+		);
+		$this->data['heading'] = $head[$form_id];
+		$this->data['respondents'] = $this->evaluation->respondents($fac_id, $form_id);
+		$course_list = '';
+		$courses = $this->courses->courses_handled($fac_id);
+		foreach ($courses as $c) {
+			$course_list .= $c->id . ', ';
+		}
+		$this->data['courses'] = rtrim($course_list, ', ');
 
 		$this->load->library('pdf');
 		$pdf = $this->pdf->load();
