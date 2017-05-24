@@ -286,43 +286,43 @@ class Courses extends CI_Controller {
 
                 	$check_code = $this->courses->code_exist($id);
                 	if ( $check_code ) {
-                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code <strong>'.$id.'</strong> already exist.';
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code <strong>'.$id.'</strong> already exist.<br>';
             			continue;
                 	}
                 	if (empty($id)) {
-                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code is required.';
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code is required.<br>';
             			continue;
                 	}
                 	if (empty($title)) {
-                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Title is required.';
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Title is required.<br>';
             			continue;
                 	}
                 	if (empty($program)) {
-                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Program is required.';
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Program is required.<br>';
             			continue;
                 	}
                 	$program_exist = $this->programs->code_exist($program);
                 	if ( $program_exist == false ) {
-                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Program<strong>'.$program.'</strong> did not exist in programs.';
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' - Program<strong>'.$program.'</strong> did not exist in programs.<br>';
             			continue;
                 	}
                 	if (empty($f_ID)) {
-                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Faculty ID is required.';
+                		$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Faculty ID is required.<br>';
             			continue;
                 	}
                 	$fac_exists = $this->user->data($f_ID);
                 	if ( $fac_exists ) {
                 		if ( $fac_exists->role == '1' || $fac_exists->role == '5' ) {
-                			$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;An error has occured in Code '.$id.'. Pleace check the entered fields then try again.';
+                			$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;An error has occured in Code '.$id.'. Pleace check the entered fields then try again.<br>';
                 		}
                 		else {
 	                		$save_course = $this->courses->add($id,$title, $f_ID, $program);
 	                		if ( $save_course ) {
-	            				$msg .= '<i class="glyphicon glyphicon-ok text-success"></i> &nbsp;Code '.$id.' has been added successfully.';
+	            				$msg .= '<i class="glyphicon glyphicon-ok text-success"></i> &nbsp;Code '.$id.' has been added successfully.<br>';
 	            			}
 	            			else {
 	            				$this->user->delete($f_ID);
-	            				$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' has been failed.';
+	            				$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' has been failed.<br>';
 	            			}
                 		}
                 	}
@@ -331,11 +331,11 @@ class Courses extends CI_Controller {
                 		if ( $save ) {
                 			$save_course = $this->courses->add($id,$title, $f_ID, $program);
                 			if ( $save_course ) {
-                				$msg .= '<i class="glyphicon glyphicon-ok text-success"></i> &nbsp;Code '.$id.' has been added successfully.';
+                				$msg .= '<i class="glyphicon glyphicon-ok text-success"></i> &nbsp;Code '.$id.' has been added successfully.<br>';
                 			}
                 			else {
                 				$this->user->delete($f_ID);
-                				$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' has been failed.';
+                				$msg .= '<i class="glyphicon glyphicon-remove text-danger"></i> &nbsp;Code '.$id.' has been failed.<br>';
                 			}
                 		}
                 	}
