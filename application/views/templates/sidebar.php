@@ -51,7 +51,6 @@
 			break;
 		case 3:
 			$evaluate = true;
-			$reports = true;
 			break;
 		case 4:
 			$evaluate = true;
