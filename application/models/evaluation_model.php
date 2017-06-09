@@ -357,4 +357,14 @@ class Evaluation_model extends CI_Model {
             return $respondents;
         }
     }
+
+    function number_of_questions($form) {
+        $this->db->select('questions.category as qc, count(questions.id) as count');
+        $this->db->from('questions');
+        $this->db->join('categories', 'questions.category = categories.id');
+        $this->db->where('categories.form', $form);
+        $query = $this->db->get()->row();
+        
+        return $query ? $query->count : 0;
+    }
 }

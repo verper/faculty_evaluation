@@ -15,12 +15,13 @@
 				<tr>
 					<td style="vertical-align:bottom;"><?php echo $que->title;?></td>
 					<td width="25%">
-						<select name="ans[<?php echo $que->id;?>]" class="form-control input-sm" max="5" required>
-							<option value="1">1- Very Poor/ Highly Unsatisfactory</option>
-							<option value="2">2- Poor/Unsatisfactory</option>
-							<option value="3" selected>3- Average/Fair/Needs Improvement</option>
-							<option value="4">4- Good/Moderately Satisfactory</option>
+						<select name="ans[<?php echo $que->id;?>]" class="form-control input-sm" max="5" min="1" required>
+							<option disabled value="" selected>- Click to rate -</option>
 							<option value="5">5- Very good/ Highly Satisfactory</option>
+							<option value="4">4- Good/Moderately Satisfactory</option>
+							<option value="3">3- Average/Fair/Needs Improvement</option>
+							<option value="2">2- Poor/Unsatisfactory</option>
+							<option value="1">1- Very Poor/ Highly Unsatisfactory</option>
 						</select>
 					</td>
 				</tr>

@@ -73,7 +73,7 @@ class Evaluate extends CI_Controller {
 			$faculty = $this->input->post('faculty');
 			$ratings = $this->input->post('ans');
 			$comments = $this->input->post('comments');
-
+			
 			$validate = $this->evaluation->validate_evaluation($logged_in->id, $faculty);
 			if ( !$validate ) { redirect('evaluate'); }
 
@@ -84,6 +84,11 @@ class Evaluate extends CI_Controller {
 				$form  = $this->forms->get_user_form(2); //change form to peer to peer if same program head
 			}
 			
+			if ( $this->evaluation->number_of_questions($form->form->id) != count($ratings) ) {
+				$this->session->set_flashdata('error', 'Make you sure have rate all the questions. Please try again.');
+				redirect('evaluate');
+			}
+
 			$save = $this->evaluation->process_evaluation($evaluator, $faculty, $ratings, $form, $comments);
 			if ( $save ) {
 				$fac = $this->user->data($faculty);
