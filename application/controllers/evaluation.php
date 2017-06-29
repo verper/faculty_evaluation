@@ -130,7 +130,7 @@ class Evaluation extends CI_Controller {
 
 		$save = file_put_contents('sched.json', $arr);
 
-		$this->session->set_flashdata('success', 'Period of Evaluation has been saved to S.Y. '. $sy. ' - ' . $sem . ' semester.');
+		$this->session->set_flashdata('success', 'Period of Evaluation has been saved to S.Y. '. $sy. ' - '.($sy+1).', ' . $sem . ' semester.');
 		redirect('evaluation');
 	}
 
