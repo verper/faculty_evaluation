@@ -108,6 +108,7 @@ class Reports extends CI_Controller {
 		}
 		$this->data['courses'] = rtrim($course_list, ', ');
 
+		$this->data['period'] = $this->evaluation->get_sched();
 		$this->load->library('pdf');
 		$pdf = $this->pdf->load();
 		$html=$this->load->view('pdf/faculty',$this->data,true);	 

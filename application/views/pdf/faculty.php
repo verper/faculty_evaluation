@@ -46,7 +46,7 @@ table {
     <td width="50%"><strong>Employment Status:</strong></td>
   </tr>
   <tr>
-    <td width="50%"><strong>Period of Evaluation:</strong></td>
+    <td width="50%"><strong>Period of Evaluation:</strong> <?php echo $period['sy'];?>-<?php echo $period['sy']+1;?></td>
     <td width="50%"></td>
   </tr>
 </table>

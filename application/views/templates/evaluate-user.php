@@ -1,6 +1,14 @@
 <div class="page-header">
-	<h4>User ID: <?php echo $title;?></h4>
- 	<h4>Faculty: <?php echo $faculty->lastname . ', ' . $faculty->firstname . ' ' . $faculty->middlename;?></h4>
+	<div class="row">
+		<div class="col-sm-6">
+			<h4>User ID: <?php echo $title;?></h4>
+ 			<h4>Faculty: <?php echo $faculty->lastname . ', ' . $faculty->firstname . ' ' . $faculty->middlename;?></h4>
+		</div>
+		<div class="col-sm-6">
+			<h4>S.Y. <?php echo $period['sy'];?>-<?php echo $period['sy']+1;?></h4>
+			<h4>Semester: <?php echo $period['sem'];?></h4>
+		</div>
+	</div>
 </div>
 
 <legend><?php echo $form->form->title;?></legend>

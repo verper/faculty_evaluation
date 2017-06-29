@@ -367,4 +367,17 @@ class Evaluation_model extends CI_Model {
         
         return $query ? $query->count : 0;
     }
+
+
+    function get_sched() {
+        $sched = file_get_contents('sched.json');
+
+        if ( $sched ) {
+            $sched = json_decode($sched, TRUE);
+            
+            return $sched;
+        }
+        
+        return array('sy' => date('Y'), 'sem' => '1st');
+    }
 }

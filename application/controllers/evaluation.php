@@ -39,6 +39,7 @@ class Evaluation extends CI_Controller {
 		$this->data['role_form'] = $this->forms->get_role_form();
 		$this->data['faculties'] = $peer_selection;
 		$this->data['schedules'] = $this->evaluation->peer_list();
+		$this->data['sched'] = $this->evaluation->get_sched();
 		$this->load->view('page-user', $this->data);
 	}
 
@@ -121,6 +122,17 @@ class Evaluation extends CI_Controller {
 		redirect('evaluation');
 	}
 
+	function sched() {
+		$sem = $this->input->post('semester');
+		$sy = $this->input->post('sy');
+		$arr = array('sy' => $sy ,'sem' => $sem);
+		$arr = json_encode($arr);
+
+		$save = file_put_contents('sched.json', $arr);
+
+		$this->session->set_flashdata('success', 'Period of Evaluation has been saved to S.Y. '. $sy. ' - ' . $sem . ' semester.');
+		redirect('evaluation');
+	}
 
 	function reset_ratings() {
 		if ( $this->input->post('form_id') == 'reset_ratings' ) {

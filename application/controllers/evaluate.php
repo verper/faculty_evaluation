@@ -62,6 +62,7 @@ class Evaluate extends CI_Controller {
 		$this->data['content'] = 'evaluate-user';
 		$this->data['faculty'] = $faculty;
 		$this->data['form'] = $form;
+		$this->data['period'] = $this->evaluation->get_sched();
 		$this->load->view('page-user', $this->data);
 	}
 

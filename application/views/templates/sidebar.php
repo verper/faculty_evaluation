@@ -70,6 +70,16 @@
 			$reports = true;
 			break;
 	}
+
+	if ( $this->uri->segment(1) == 'dashboard' && !$dashboard ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'evaluate' && !$evaluate ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'colleges' && !$colleges ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'programs' && !$programs ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'courses' && !$courses ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'users' && !$users ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'forms' && !$forms ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'evaluation' && !$evaluation ) { header('Location: /404'); }
+	if ( $this->uri->segment(1) == 'reports' && !$reports ) { header('Location: /404'); }
 ?>
 <div class="profile-usermenu">
 <ul class="nav">
